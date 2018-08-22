@@ -1,10 +1,8 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-
 public class UnionFind {
 
-  private int[] data;
+  protected int[] data;
 
   UnionFind(int n){
     data = new int[n];
