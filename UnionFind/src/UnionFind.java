@@ -26,6 +26,17 @@ public class UnionFind {
     }
   }
 
+  //Solution for interview question
+  public int find(int i){
+    //Returns the largest element, connected to element i
+    int max = i;
+    for (int j = i + 1; j < data.length; ++j){
+      if (data[j] == data[i])
+        max = j;
+    }
+    return max;
+  }
+
   public static void main(String[] args){
     try {
       System.setIn(new FileInputStream(new File("Input/input.txt")));
@@ -35,15 +46,17 @@ public class UnionFind {
     }
     int n = StdIn.readInt();
     int p, q;
-    UnionFind uf = new UnionFind(n);
-    while (!StdIn.isEmpty()){
+    WeightedUF uf = new WeightedUF(n);
+    while (!StdIn.isEmpty()) {
       p = StdIn.readInt();
       q = StdIn.readInt();
-      if (!uf.connected(p, q)){
+      if (!uf.connected(p, q)) {
         uf.union(p, q);
         StdOut.println(p + " " + q);
       }
     }
+    for (int i = 0; i < uf.treeSize.length; ++i)
+      StdOut.print("[" +i + "] " + uf.treeSize[i] + ";");
   }
 
 }

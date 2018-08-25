@@ -2,7 +2,7 @@ public class WeightedUF extends QuickUnionUF {
 
   //This class implements weighted trees, that are shallower than in superclass, so the find operation is faster
 
-  private int[] treeSize;
+  public int[] treeSize;
 
   public WeightedUF(int n){
     super(n);
@@ -28,9 +28,10 @@ public class WeightedUF extends QuickUnionUF {
 
   @Override
   protected int root(int i) {
-      while (i != data[i])
+      while (i != data[i]) {
         data[i] = data[data[i]]; //Now each element of the tree points to it's grandparent. It's flattening the tree
         i = data[i];
+      }
       return i;
   }
 }
