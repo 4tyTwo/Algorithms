@@ -17,9 +17,6 @@ public class Percolation {
     virtualBottom = virtualTop + 1;
     openedSites = 0;
     data = new boolean[n][n];
-    for (int i = 0; i < n; ++i)
-      for (int j = 0; j < n; ++j)
-        data[i][j] = false;
   }
 
   public void open(int row, int col) {
