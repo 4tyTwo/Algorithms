@@ -1,10 +1,10 @@
-public class LinkedListStack implements Stack {
+public class LinkedListStack<Item> implements Stack<Item> {
 
   class Node {
-    public int item;
-    public Node next;
+    private Item item;
+    private Node next;
 
-    Node(int elem, Node node){
+    Node(Item elem, Node node){
       item = elem;
       next = node;
     }
@@ -12,13 +12,13 @@ public class LinkedListStack implements Stack {
 
   private Node first = null;
 
-  public void push(int elem) {
+  public void push(Item elem) {
     Node oldFirst = first;
     first = new Node(elem, oldFirst);
   }
 
-  public int pop() {
-      int item = first.item;
+  public Item pop() {
+      Item item = first.item;
       first = first.next;
       return item;
   }

@@ -1,21 +1,21 @@
-public class DynamicArrayStack implements Stack {
+public class DynamicArrayStack<Item> implements Stack<Item> {
 
-  int[] data;
-  int n;
+  private Item[] data;
+  private int n;
 
   public DynamicArrayStack(){
-    data = new int[1];
+    data = (Item[]) new Object[1];
     n = 0;
   }
 
-  public void push(int elem){
+  public void push(Item elem){
     if (n == data.length)
       resize(2 * data.length);
     data[n++] = elem;
   }
 
-  public int pop(){
-    int elem = data[--n];
+  public Item pop(){
+    Item elem = data[--n];
     if (n > 0 && n <= data.length/4)
       resize(data.length/2);
     return elem;
@@ -26,9 +26,8 @@ public class DynamicArrayStack implements Stack {
   }
 
   private void resize(int newSize){
-    int[] newData = new int[newSize];
-    for (int i = 0; i < n; ++i)
-      newData[i] = data[i];
+    Item[] newData = (Item[]) new Object[newSize];
+    System.arraycopy(data,0, newData, 0, n);
     data = newData;
   }
 

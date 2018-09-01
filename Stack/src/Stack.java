@@ -1,6 +1,6 @@
-public interface Stack {
+public interface Stack<Item> {
 
-  void push(int elem);
-  int pop();
+  void push(Item elem);
+  Item pop();
   boolean isEmpty();
 }
