@@ -5,15 +5,23 @@ import java.util.Iterator;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
+  private Item[] data;
+  private int n;
+
   private class RandomizedQueueIterator implements Iterator<Item> {
-    int curr = n;
+
+    private int curr = n;
+
+    public RandomizedQueueIterator() {
+      StdRandom.shuffle(data, 0, n);
+    }
 
     public boolean hasNext() {
       return curr > 0;
     }
 
     public Item next() {
-      if ( curr == 0 )
+      if (curr == 0)
         throw new java.util.NoSuchElementException();
       return data[--curr];
     }
@@ -24,8 +32,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
   }
 
-  Item[] data;
-  int n;
   // Can add some container to store empty fields
 
   public RandomizedQueue() {
@@ -42,7 +48,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   }
 
   public void enqueue(Item item) {
-    if ( item == null )
+    if (item == null)
       throw new java.lang.IllegalArgumentException();
     if (n == data.length)
       resize(n * 2);
@@ -50,7 +56,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   }
 
   public Item dequeue() {
-    if ( n == 0 )
+    if (n == 0)
       throw new java.util.NoSuchElementException();
     int rnd = StdRandom.uniform(n);
     Item returned = data[rnd];
@@ -72,26 +78,28 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     return new RandomizedQueueIterator();
   }
 
-  static public void main(String[] args) {
+  public static void main(String[] args) {
     RandomizedQueue<Integer> rq = new RandomizedQueue<>();
-    for (int i = 0; i < 10; ++i)
-      rq.enqueue(StdRandom.uniform(25));
-    StdOut.println("Iterating: ");
-    for (int i : rq)
-      StdOut.print(i + " ");
-    StdOut.println("\nDequeueing: ");
-    for (int i = 0; i < 10; ++i)
-      StdOut.print(rq.dequeue() + " ");
+    for (int i = 0; i < 25; ++i)
+      rq.enqueue(StdRandom.uniform(1000));
+    for (int j = 1; j < 3; ++j){
+      StdOut.println("Iterator " + j);
+      for (int i : rq)
+        StdOut.print(i + " ");
+      StdOut.println();
+    }
+
+
   }
 
   private void shift(int pos) { // pos - position of deleted element
-    int len  = n - pos;
-    System.arraycopy(data, pos + 1, data, pos, len);
+    for (int i = pos; i < n - 1; ++i)
+      data[i] = data[i + 1];
   }
 
   private void resize(int newSize){
     Item[] newData = (Item[]) new Object[newSize];
-    System.arraycopy(data,0, newData, 0, n);
+    System.arraycopy(data, 0, newData, 0, n);
     data = newData;
   }
 

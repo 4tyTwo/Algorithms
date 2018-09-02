@@ -1,9 +1,13 @@
 import java.util.Iterator;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Deque<Item> implements Iterable<Item> {
 
+  private Node first, last;
+  private int n;
+
   private class Node {
-    private Item content;
+    private final Item content;
     private Node next;
     private Node prev;
 
@@ -35,19 +39,17 @@ public class Deque<Item> implements Iterable<Item> {
 
   }
 
-  private Node first, last;
-  private int n;
-
   public Deque() {
-    first = last = null;
+    first = null;
+    last = null;
     n = 0;
   }
 
   public boolean isEmpty() {
-    return n > 0;
+    return n == 0;
   }
 
-  public int size(){
+  public int size() {
     return n;
   }
 
@@ -98,18 +100,17 @@ public class Deque<Item> implements Iterable<Item> {
   }
 
 
-  static public void main(String[] Args) {
-    Deque<Integer> dq = new Deque<>();
-    dq.addFirst(1);
+  public static void main(String[] Args) {
+    Deque<Integer> dq = new Deque<Integer>();
+    dq.addLast(1);
     dq.addLast(2);
+    dq.addLast(3);
     dq.addFirst(4);
-    dq.addFirst(3);
-    dq.removeLast();
-    dq.removeLast();
-    dq.removeLast();
-    dq.addLast(9);
-    for (int i : dq)
-      StdOut.print(i + " ");
+    dq.addFirst(5);
+    dq.addLast(6);
+    dq.addFirst(7);
+    StdOut.println(dq.removeLast());
+    StdOut.print(dq.size());
   }
 
 }
